@@ -19,7 +19,7 @@
             :label="secondItem.name"
             :name="secondItem.name"
           >
-            <div style="height: calc(100vh - 180px); overflow-y: auto; overflow-x: hidden">
+            <div style="height: calc(100vh - 200px); overflow-y: auto; overflow-x: hidden">
               <div style="margin-bottom: 10px">
                 <el-tag
                   :type="tagType[tipIndex % 5]"

@@ -10,12 +10,12 @@ interface NightmareDataType {
 
 const TopData: NightmareDataItemType[] = [
   { name: '上', size: 11, tips: [{ name: 'tip', index: 1 }] },
-  { name: '上右', size: 1 },
-  { name: '上左', size: 1 },
+  { name: '上右', size: 9 },
+  { name: '上左', size: 11 },
   { name: '上下', size: 1 },
-  { name: '上左右', size: 1 },
-  { name: '上下左', size: 1 },
-  { name: '上下右', size: 1 },
+  { name: '上左右', size: 3 },
+  { name: '上下左', size: 6 },
+  { name: '上下右', size: 11 },
 ];
 const RightData: NightmareDataItemType[] = [
   { name: '右', size: 1 },
