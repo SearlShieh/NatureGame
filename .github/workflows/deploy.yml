@@ -1,0 +1,35 @@
+name: 自动部署 dist 到 GitHub Pages
+on:
+  # 触发条件：推送到 main 分支时执行（替换为你的主分支名，如 master）
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. 拉取 GitHub 仓库代码
+      - name: 拉取代码
+        uses: actions/checkout@v4
+
+      # 2. 安装 Node.js（匹配你项目的 Node 版本，如 18.x）
+      - name: 安装 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      # 3. 安装依赖并打包生成 dist 目录
+      - name: 安装依赖 + 打包
+        run: |
+          npm install
+          npm run build
+
+      # 4. 将 dist 目录部署到 gh-pages 分支的根目录
+      - name: 部署到 GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }} # 自动授权，无需手动配置
+          publish_dir: ./dist
+          publish_branch: pages # 部署到的分支
+          force_orphan: true
