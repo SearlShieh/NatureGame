@@ -1,10 +1,11 @@
 <template>
   <div>
-    测试一下222222222
+    <Nightmare/>
   </div>
 </template>
 
 <script lang="ts" setup>
+import Nightmare from './Nightmare/index.vue';
 import { onMounted, onActivated, onUnmounted } from 'vue';
 defineOptions({ name: 'Test' });
 
