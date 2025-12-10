@@ -12,22 +12,24 @@
         :label="firstItem.name"
         :name="firstItem.name"
       >
-        <el-tabs class="second_tab" v-model="secondValue">
-          <el-tab-pane
-            v-for="secondItem in firstItem.data"
-            :key="secondItem.name + 'second'"
-            :label="secondItem.name"
-            :name="secondItem.name"
-          >
-            <div style="height: calc(100vh - 180px); overflow-y: auto; overflow-x: hidden">
+        <div style="height: calc(100vh - 180px); overflow-y: auto; overflow-x: hidden">
+          <el-tabs class="second_tab" v-model="secondValue">
+            <el-tab-pane
+              v-for="secondItem in firstItem.data"
+              :key="secondItem.name + 'second'"
+              :label="secondItem.name"
+              :name="secondItem.name"
+            >
               <div style="margin-bottom: 10px">
                 <el-tag
+                  v-for="(item, tipIndex) in secondItem.size"
+                  :key="item + 'tip'"
                   :type="tagType[tipIndex % 5]"
                   style="margin-right: 2px; margin-bottom: 2px"
-                  v-for="(tip, tipIndex) in secondItem.tips"
-                  @click="gotoImage(tip.index)"
+                  @click="gotoImage(item)"
                 >
-                  {{ tip.name }}
+                  <span style="color: red">{{ item }}</span>
+                  .{{ secondItem.tip?.[item] || '-' }}
                 </el-tag>
               </div>
               <el-image
@@ -47,9 +49,9 @@
               />
               <!-- <img class="img_item" :id="`${firstItem.name}_${secondItem.name}_${item}`" 
               v-for="item in secondItem.size" :key="item"  :src="getImageUrl(firstItem, secondItem, item)"></img> -->
-            </div>
-          </el-tab-pane>
-        </el-tabs>
+            </el-tab-pane>
+          </el-tabs>
+        </div>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -65,6 +67,7 @@
   const tagType = ['primary', 'success', 'info', 'warning', 'danger'];
 
   const handleClickFirst = (tab: any, event: Event) => {
+    window.scrollTo(0, 0);
     secondValue.value = NightmareData[tab.index].data[0].name;
   };
 

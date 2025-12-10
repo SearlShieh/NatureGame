@@ -1,7 +1,7 @@
 interface NightmareDataItemType {
   name: string;
   size?: number;
-  tips?: { name: string; index: number }[]; // 提示
+  tip?: Record<number, string>;
 }
 interface NightmareDataType {
   name: string;
@@ -9,7 +9,7 @@ interface NightmareDataType {
 }
 
 const TopData: NightmareDataItemType[] = [
-  { name: '上', size: 2, tips: [{ name: 'tip', index: 1 }] },
+  { name: '上', size: 2, tip: { 1: '', 2: '' } },
   { name: '上右', size: 1 },
   { name: '上左', size: 1 },
   { name: '上下', size: 1 },
