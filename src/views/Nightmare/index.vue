@@ -29,7 +29,7 @@
                   @click="gotoImage(item)"
                 >
                   <span style="color: red">{{ item }}</span>
-                  . {{ secondItem.tip?.[item] || '-' }}
+                  . <span v-html="secondItem.tip?.[item] || '-'"></span>
                 </el-tag>
               </div>
               <template v-for="item in secondItem.size" :key="item">
