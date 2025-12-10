@@ -12,7 +12,7 @@
         :label="firstItem.name"
         :name="firstItem.name"
       >
-        <div style="height: calc(100vh - 60px); overflow-y: auto; overflow-x: hidden">
+        <div style="height: calc(100vh - 80px); overflow-y: auto; overflow-x: hidden">
           <el-tabs class="second_tab" v-model="secondValue">
             <el-tab-pane
               v-for="secondItem in firstItem.data"
@@ -29,26 +29,26 @@
                   @click="gotoImage(item)"
                 >
                   <span style="color: red">{{ item }}</span>
-                  .{{ secondItem.tip?.[item] || '-' }}
+                  . {{ secondItem.tip?.[item] || '-' }}
                 </el-tag>
               </div>
-              <el-image
-                v-for="item in secondItem.size"
-                :key="item"
-                class="img_item"
-                :id="`${firstItem.name}_${secondItem.name}_${item}`"
-                :src="getImageUrl(firstItem, secondItem, item)"
-                :zoom-rate="1.2"
-                :max-scale="7"
-                :min-scale="0.2"
-                :preview-src-list="[getImageUrl(firstItem, secondItem, item)]"
-                show-progress
-                :initial-index="0"
-                fit="contain"
-                style="margin-bottom: 8px"
-              />
-              <!-- <img class="img_item" :id="`${firstItem.name}_${secondItem.name}_${item}`" 
-              v-for="item in secondItem.size" :key="item"  :src="getImageUrl(firstItem, secondItem, item)"></img> -->
+              <template v-for="item in secondItem.size" :key="item">
+                <div :id="`${firstItem.name}_${secondItem.name}_${item}`" style="font-weight: bold">
+                  {{ item }}. {{ secondItem.tip?.[item] || '-' }}
+                </div>
+                <el-image
+                  class="img_item"
+                  :src="getImageUrl(firstItem, secondItem, item)"
+                  :zoom-rate="1.2"
+                  :max-scale="7"
+                  :min-scale="0.2"
+                  :preview-src-list="[getImageUrl(firstItem, secondItem, item)]"
+                  show-progress
+                  :initial-index="0"
+                  fit="contain"
+                  style="margin-bottom: 8px"
+                />
+              </template>
             </el-tab-pane>
           </el-tabs>
         </div>
@@ -78,8 +78,8 @@
     ).href;
   };
 
-  const gotoImage = (data: any) => {
-    const id = `${firstValue.value}_${secondValue.value}_${data.index}`;
+  const gotoImage = (item: number) => {
+    const id = `${firstValue.value}_${secondValue.value}_${item}`;
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
