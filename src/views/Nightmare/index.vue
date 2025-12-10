@@ -12,7 +12,7 @@
         :label="firstItem.name"
         :name="firstItem.name"
       >
-        <div style="height: calc(100vh - 180px); overflow-y: auto; overflow-x: hidden">
+        <div style="height: calc(100vh - 60px); overflow-y: auto; overflow-x: hidden">
           <el-tabs class="second_tab" v-model="secondValue">
             <el-tab-pane
               v-for="secondItem in firstItem.data"
