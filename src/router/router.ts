@@ -4,6 +4,10 @@ const routes: RouteRecordRaw[] = [
     path: '/',
     component: () => import('@/views/Home.vue'),
   },
+  {
+    path: '/sixgame',
+    component: () => import('@/views/SixGame/index.vue'),
+  },
 ];
 
 export const router = createRouter({
@@ -12,11 +16,9 @@ export const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-   next();
+  next();
 });
 
-router.afterEach(() => {
-  
-});
+router.afterEach(() => {});
 
 export default router;
