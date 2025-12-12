@@ -9,8 +9,9 @@
       }"
     >
       <div
-        v-for="(item, index) in allCount"
+        v-for="(item, index) in dataList"
         class="card-item"
+        :key="item.value"
         :style="{
           width: itemWidth + 'px',
           height: itemWidth + 'px',
@@ -18,13 +19,15 @@
           top: Math.floor(index / size) * itemWidth + 'px',
         }"
       >
-        {{ item }}
+        {{ item.value }}
       </div>
     </div>
 
     <div style="text-align: center">
-      <el-button type="primary">重新生成</el-button>
-      <el-button>保存图片</el-button>
+      <el-button :loading="loading" v-if="times > 0" @click="getData" type="primary">
+        重新生成
+      </el-button>
+      <el-button :loading="loading">保存图片</el-button>
     </div>
 
     <!-- 状态提示 -->
@@ -33,22 +36,21 @@
 </template>
 
 <script lang="ts" setup>
-  import { SixData } from './data';
+  import { SixData, SixDataListType } from './data';
   import { onMounted, onActivated, onUnmounted, ref, computed } from 'vue';
-  const times = ref(3);
+  const times = ref(4);
   const itemWidth = ref(50);
   const size = ref(6);
+  const dataList = ref<SixDataListType[]>([]);
+  const loading = ref(false);
   const allCount = computed(() => {
     return size.value * size.value;
   });
 
-  onMounted(() => {
-    itemWidth.value = (window.innerWidth - 20) / size.value;
-  });
-
   const getData = () => {
-    const data = [];
-    const otherData = [];
+    times.value -= 1;
+    const data: SixDataListType[] = [];
+    const otherData: SixDataListType[] = [];
     SixData.forEach((item) => {
       for (let i = 0; i < item.min; i++) {
         data.push({ name: item.name, value: `${item.name}-${i + 1}` });
@@ -57,42 +59,55 @@
         otherData.push({ name: item.name, value: `${item.name}-${i + 1}` });
       }
     });
-    const resultData = data.concat(getRandomElements(otherData, allCount.value - data.length));
+    let resultData = data.concat(getRandomElements(otherData, allCount.value - data.length));
+    for (let i = 0; i < 1; i++) {
+      setTimeout(() => {
+        resultData = getRandomElements(resultData, allCount.value);
+        dataList.value = resultData;
+      }, 300 * i);
+    }
   };
 
-  const getRandomElements = (arr: any[], count: number) => {
-    // 深拷贝原数组，避免修改原数据
+  // 排序打乱一遍
+  const sortElements = (arr: SixDataListType[]) => {
     const copyArr = [...arr];
-    const result = [];
+    copyArr.forEach((item) => {
+      item.sortIndex = Math.floor(Math.random() * ((copyArr.length + 1) * 10));
+    });
+    copyArr.sort((a, b) => (a.sortIndex || 0) - (b.sortIndex || 0));
+    return copyArr;
+  };
 
-    // 取数次数：取「指定个数」和「数组长度」的较小值（避免数组长度不足3）
-    const takeCount = Math.min(count, copyArr.length);
-
+  // 从数组里随机抽取n个元素
+  const getRandomElements = (arr: SixDataListType[], takeCount: number) => {
+    const copyArr = [...sortElements(arr)];
     // Fisher-Yates 洗牌算法（随机打乱数组）
     for (let i = copyArr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [copyArr[i], copyArr[j]] = [copyArr[j], copyArr[i]];
     }
 
-    // 截取前takeCount个元素
-    result.push(...copyArr.slice(0, takeCount));
+    const result = copyArr.slice(0, takeCount);
     return result;
   };
 
-  const getRandomNumberOpt = (min: number, max: number, exclude: number[]) => {
-    // 步骤1：构建0-50的所有合法值数组（过滤排除项）
-    const validNumbers = [];
-    for (let i = min; i <= max; i++) {
-      if (!exclude.includes(i)) {
-        validNumbers.push(i);
-      }
-    }
+  onMounted(() => {
+    itemWidth.value = (window.innerWidth - 20) / size.value;
+    getData();
+  });
 
-    // 步骤2：从合法数组中随机取一个（数组为空时返回null，避免报错）
-    if (validNumbers.length === 0) return null;
-    const randomIndex = Math.floor(Math.random() * validNumbers.length);
-    return validNumbers[randomIndex];
-  };
+  const tip = ref(
+    `真是倒反天罡，陪陪让我捡玉扳指？我才不捡，我要去柜子里翻大剑。行吧，小女子能屈能伸，捡就捡……
+    别人家都是带老板又出圣杯又开大剑，一个比一个富，你倒好，带老板在昆仑捡垃圾？！一天比一天穷？！
+    没错，又是带老板去昆仑捡垃圾的一天。让我们来见证一下老板的非酋之路。
+    一个紫，两个紫，三个紫，四个紫，五个紫，六个紫……老板一手紫色东来，主包实在是没眼看了。我说我们在打小胃袋你信吗？
+    七个紫，很好，这道金光，成功让我们后面少捡了五万的垃圾哈哈哈哈。
+    看到前面两个金棺了吗？我们还有希望！……老板看着自己变出来的尿壶，好像不是很想拿哈哈哈哈。
+    老板看着金棺里的小垃圾，还不敢相信，问我变了没有？我说变了还是碎片。
+    要不咱们别玩薇薇安了，这变了好像和没变一样？！
+    老板别发呆了，快把玉扳指捡了，我们要出不去了哈哈哈哈。
+    `
+  );
 </script>
 
 <style lang="scss" scoped>

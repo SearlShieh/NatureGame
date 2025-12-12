@@ -8,6 +8,10 @@ const routes: RouteRecordRaw[] = [
     path: '/sixgame',
     component: () => import('@/views/SixGame/index.vue'),
   },
+  {
+    path: '/filetobase64',
+    component: () => import('@/views/FileToBase64/index.vue'),
+  },
 ];
 
 export const router = createRouter({
