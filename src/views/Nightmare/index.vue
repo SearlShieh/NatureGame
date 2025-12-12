@@ -34,7 +34,7 @@
                 </el-tag>
               </div>
               <template v-for="item in secondItem.size" :key="item">
-                <div :id="`${firstItem.name}_${secondItem.name}_${item}`" v-html="`${ item }. ${ secondItem.tip?.[item] || '-' }" style="font-weight: bold">
+                <div :id="`${firstItem.name}_${secondItem.name}_${item}`" v-html="`${ item }. ${ secondItem.tip?.[item] || '-' }`" style="font-weight: bold">
                 </div>
                 <el-image
                   class="img_item"
