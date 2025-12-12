@@ -5,6 +5,10 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/views/Home.vue'),
   },
   {
+    path: '/nightmare',
+    component: () => import('@/views/Nightmare/index.vue'),
+  },
+  {
     path: '/sixgame',
     component: () => import('@/views/SixGame/index.vue'),
   },
