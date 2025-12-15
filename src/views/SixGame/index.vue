@@ -31,7 +31,7 @@
     flex-direction: column;
     align-content: center;
     justify-content: center;
-    height: 100vh;
+    height: 96vh;
     width: 100vw;
     // background: url('../../assets//SixGame/bg.png');
     background: #90defb;
