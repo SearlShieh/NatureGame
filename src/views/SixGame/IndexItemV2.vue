@@ -16,31 +16,24 @@
         :style="{
           width: itemWidth + 'px',
           height: itemWidth + 'px',
-          left: (index % size) * (itemWidth+1) + 'px',
-          top: Math.floor(index / size) * (itemWidth+1) + 'px',
-          '--color': (index %2) === ((Math.floor(index / size))%2) ? '#857557' : '#857557'
+          left: (index % size) * itemWidth + 'px',
+          top: Math.floor(index / size) * itemWidth + 'px',
+          '--color': (index %2) === ((Math.floor(index / size))%2) ? '#33edfe' : '#d6f1fe'
         }"
       >
         <img :src="ImageData[item.imgIndex || 0]"></img>
       </div>
     </div>
 
-    <div style="text-align: center;margin: 14px 0 0 0 ;" class="container_menu">
-      <div class="container_menu_item" style="margin-right: 10px" :loading="loading" v-if="times > 0" @click="refresh" >
-        <img width="25" src="@/assets/SixGame/icon-1.png"></img>
-        再来一次
+    <div style="text-align: center;margin-top: 10px;">
+      <div class="btn" :loading="loading" v-if="times > 0" @click="refresh" >
+        重新生成
       </div>
-      <div class="container_menu_item container_menu_item_active" @click="downloadImage">
-        <img width="25" src="@/assets/SixGame/icon-4.png"></img>
-        保存一下
-      </div>
+      <div class="btn" @click="downloadImage" :loading="loading">保存图片</div>
     </div>
 
     <!-- 状态提示 -->
-    <div style="text-align: center" class="status" v-if="times > 0">
-      <img style="position: relative;top: 7px;" width="25" src="@/assets/SixGame/icon-3.png"/>
-      亲爱的小宝，你还有 {{ times }} 次机会！
-    </div>
+    <div style="text-align: center" class="status" v-if="times > 0">亲爱的小宝，你还有 {{ times }} 次机会！</div>
     <div style="text-align: center" class="status" v-else>小宝实在抱歉，机会用光啦！</div>
   </div>
 </template>
@@ -153,16 +146,27 @@
   }
 
   onMounted(() => {
-    itemWidth.value = (window.innerWidth - 20 - (props.size-1)*1) / props.size;
-    times.value = localStorage.getItem(`times-${props.size}`) ? parseInt(localStorage.getItem(`times-${props.size}`) as string) : 99;
+    itemWidth.value = (window.innerWidth - 20) / props.size;
+    times.value = localStorage.getItem(`times-${props.size}`) ? parseInt(localStorage.getItem(`times-${props.size}`) as string) : 4;
     if(router.query.zgTiantian){
-      times.value = 99
+      times.value = 100
     }
     getData();
   });
 </script>
 
 <style lang="scss" scoped>
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    height: 100vh;
+    width:100vw;
+    // background: url('../../assets//SixGame/bg.png');
+    background: #2ec1f5;
+    background-size: 100% 100%;
+  }
   .card-box {
     position: relative;
     margin: 10px 10px;
@@ -180,6 +184,7 @@
     }
   }
   .status {
+    margin-top: 14px;
     color: #fff;
   }
   .btn{
