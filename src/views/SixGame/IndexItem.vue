@@ -47,7 +47,7 @@
 
 <script setup lang="ts">
   import { SixData, SixDataListType, GameData } from './data';
-  import { ImageData } from './ImageDataTest';
+  import { ImageData } from './ImageData.js';
   import { onMounted, onActivated, onUnmounted, ref, computed } from 'vue';
   import html2canvas from 'html2canvas'
   import { useRoute } from 'vue-router'
