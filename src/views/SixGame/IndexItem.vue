@@ -4,8 +4,8 @@
     <div
       class="card-box"
       :style="{
-        width: itemWidth * size + 'px',
-        height: itemWidth * size + 'px',
+        width: itemWidth * size + (size-1) + 'px',
+        height: itemWidth * size + (size-1)  + 'px',
       }"
       id="card_container"
     >
@@ -31,7 +31,7 @@
         再来一次
       </div>
       <div class="container_menu_item container_menu_item_active" @click="downloadImage">
-        <img width="25" src="@/assets/SixGame/icon-4.png"></img>
+        <img width="22" src="@/assets/SixGame/icon-4.png"></img>
         保存一下
       </div>
     </div>

@@ -33,7 +33,7 @@
     flex-direction: column;
     align-content: center;
     justify-content: center;
-    height: 96vh;
+    height: 95vh;
     width: 100vw;
     // background: #90defb;
     background: #fed730;
