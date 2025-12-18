@@ -77,12 +77,19 @@
     const data: SixDataListType[] = [];
     const otherData: SixDataListType[] = [];
     SixData.forEach((item, index) => {
-      for (let i = 0; i < item.min; i++) {
-        data.push({ name: item.name, value: `${item.name}-${i + 1}`, imgIndex: index });
-      }
-      let addCount = (item.max - item.min) * (parseInt(String(item.add * (props.size-6)))+1);
-      for (let i = item.min; i < addCount; i++) {
-        otherData.push({ name: item.name, value: `${item.name}-${i + 1}`, imgIndex: index });
+      if(props.size <6){
+        let addCount = 1 + item.add * 2 * props.size;
+        for (let i = 0; i < addCount; i++) {
+          otherData.push({ name: item.name, value: `${item.name}-${i + 1}`, imgIndex: index });
+        }
+      }else{
+        for (let i = 0; i < item.min; i++) {
+          data.push({ name: item.name, value: `${item.name}-${i + 1}`, imgIndex: index });
+        }
+        let addCount = (item.max - item.min) * (parseInt(String(item.add * (props.size-6)))+1);
+        for (let i = item.min; i < addCount; i++) {
+          otherData.push({ name: item.name, value: `${item.name}-${i + 1}`, imgIndex: index });
+        }
       }
     });
     let resultData = data.concat(getRandomElements(otherData, allCount.value - data.length));

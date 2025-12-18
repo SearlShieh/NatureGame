@@ -11,12 +11,24 @@ export interface SixDataListType {
   imgIndex?: number;
 }
 
+export const GameDataSmall = [
+  { name: '三', value: 3, money: '3.9' },
+  { name: '四', value: 4, money: '5.9' },
+  { name: '五', value: 5, money: '7.9' }
+];
+
 export const GameData = [
   { name: '六', value: 6, money: '9.9' },
   { name: '七', value: 7, money: '12.9' },
   { name: '八', value: 8, money: '16.9' },
   { name: '九', value: 9, money: '21.9' },
   { name: '十', value: 10, money: '27.9' },
+];
+
+export const GameDataBig = [
+  { name: '十一', value: 11, money: '33.9' },
+  { name: '十三', value: 13, money: '49.9' },
+  { name: '十五', value: 15, money: '69.9' }
 ];
 
 export const SixData: SixDataType[] = [

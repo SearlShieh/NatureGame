@@ -1,7 +1,31 @@
 <template>
   <div class="container">
     <div class="container_menu">
+      <div v-for="item in GameDataSmall" 
+      @click="size=item.value"
+      :class="{'container_menu_item_active': item.value===size}" class="container_menu_item" :key="item.value">
+        <img v-if="item.value===size" width="25" src="@/assets/SixGame/icon-2.png"></img>
+        <img v-else  width="25" src="@/assets/SixGame/icon-1.png"></img>
+        <span>{{ item.name }}</span>
+        <div class="money">
+          <img width="12" src="/public/logo.png" style="margin-right: 2px"></img>{{ item.money }}
+        </div>
+      </div>
+    </div>
+    <div class="container_menu">
       <div v-for="item in GameData" 
+      @click="size=item.value"
+      :class="{'container_menu_item_active': item.value===size}" class="container_menu_item" :key="item.value">
+        <img v-if="item.value===size" width="25" src="@/assets/SixGame/icon-2.png"></img>
+        <img v-else  width="25" src="@/assets/SixGame/icon-1.png"></img>
+        <span>{{ item.name }}</span>
+        <div class="money">
+          <img width="12" src="/public/logo.png" style="margin-right: 2px"></img>{{ item.money }}
+        </div>
+      </div>
+    </div>
+    <div class="container_menu">
+      <div v-for="item in GameDataBig" 
       @click="size=item.value"
       :class="{'container_menu_item_active': item.value===size}" class="container_menu_item" :key="item.value">
         <img v-if="item.value===size" width="25" src="@/assets/SixGame/icon-2.png"></img>
@@ -19,7 +43,7 @@
 </template>
 
 <script setup lang="ts">
-  import { GameData } from './data';
+  import { GameData, GameDataSmall, GameDataBig } from './data';
   import { onMounted, onActivated, onUnmounted, ref, computed } from 'vue';
   import IndexItem from './IndexItem.vue';
   const size = ref(6);
