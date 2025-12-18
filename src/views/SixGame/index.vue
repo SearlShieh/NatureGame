@@ -71,7 +71,7 @@
   .container_menu {
     display: flex;
     align-items: center;
-    margin: 2vh auto;
+    margin: 1vh auto;
     flex-wrap: wrap;
     justify-content: center;
     &_item {
