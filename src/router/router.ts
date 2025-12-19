@@ -13,6 +13,10 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/views/SixGame/index.vue'),
   },
   {
+    path: '/gucheng',
+    component: () => import('@/views/GuCheng/index.vue'),
+  },
+  {
     path: '/filetobase64',
     component: () => import('@/views/FileToBase64/index.vue'),
   },
