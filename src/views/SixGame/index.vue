@@ -58,10 +58,6 @@
   const IndexItemChild = ref(null)
 
   onMounted(() => {});
-  const changeType = ()=>{
-    isShengdan.value = !isShengdan.value
-    IndexItemChild.value && IndexItemChild.value.refresh()
-  }
 </script>
 
 <style lang="scss" scoped>
