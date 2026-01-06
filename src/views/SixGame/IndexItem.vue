@@ -48,7 +48,7 @@
 <script setup lang="ts">
   import { SixData, SixDataListType, GameData } from './data';
   import { ImageData } from './ImageData.js';
-  import { onMounted, onActivated, onUnmounted, ref, computed } from 'vue';
+  import { onMounted, onActivated, onUnmounted, ref, computed, watch } from 'vue';
   import html2canvas from 'html2canvas'
   import { useRoute } from 'vue-router'
   import { ElMessage } from 'element-plus'
@@ -57,12 +57,17 @@
   const itemWidth = ref(10);
   const props = defineProps<{
     size: number;
+    isShengdan: boolean
   }>();
   const dataList = ref<SixDataListType[]>([]);
   const loading = ref(false);
   const router =  useRoute()
   const allCount = computed(() => {
     return props.size * props.size;
+  });
+
+  watch(props, (newVal, oldVal) => {
+    console.log(`姓名从${oldVal}变为了${newVal}`);
   });
 
   const getData = () => {
