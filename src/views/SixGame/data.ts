@@ -41,7 +41,7 @@ export const SixData: SixDataType[] = [
   { name: 'shu', min: 2, max: 4, add: 1.5 },
   { name: 'taoyong', min: 2, max: 4, add: 1.5 },
   { name: 'baiyubei', min: 1, max: 3, add: 0.5 },
-  { name: 'jinzun', min: 0, max: 3, add: 1.5 },
+  { name: 'jinzun', min: 1, max: 3, add: 1.5 },
   { name: 'suipian', min: 0, max: 0, add: 0 },
   { name: 'danglu', min: 1, max: 5, add: 1.5 },
   { name: 'jinlin', min: 2, max: 6, add: 1.5 },
