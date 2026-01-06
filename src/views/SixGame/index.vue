@@ -1,11 +1,11 @@
 <template>
   <div class="container">
-    <div class="container_menu">
+    <!-- <div class="container_menu">
       <div class="container_menu_item" style="margin-right: 10px;" @click="changeType" >
         <img width="25" src="@/assets/SixGame/icon-1.png"></img>
           切换{{isShengdan? '普通': '圣诞' }}版
       </div>
-    </div>
+    </div> -->
 
     <div class="container_menu">
       <div v-for="item in GameDataSmall" 
