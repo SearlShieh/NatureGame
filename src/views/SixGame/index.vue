@@ -1,13 +1,19 @@
 <template>
   <div class="container">
-    <!-- <div class="container_menu">
-      <div class="container_menu_item" style="margin-right: 10px;" @click="changeType" >
-        <img width="25" src="@/assets/SixGame/icon-1.png"></img>
-          切换{{isShengdan? '普通': '圣诞' }}版
-      </div>
-    </div> -->
-
     <div class="container_menu">
+      <div class="container_menu_item" style="margin-right: 6px" :class="{'container_menu_item_active': mapType==='em'}" @click="changeType('em')" >
+        <img v-if="mapType==='em'" width="25" src="@/assets/SixGame/icon-2.png"></img>
+        <img v-else width="25" src="@/assets/SixGame/icon-1.png"></img>
+        昆仑噩梦版
+      </div>
+      <div class="container_menu_item" :class="{'container_menu_item_active': mapType==='ly'}" @click="changeType('ly')" >
+        <img v-if="mapType==='ly'" width="25" src="@/assets/SixGame/icon-2.png"></img>
+        <img v-else  width="25" src="@/assets/SixGame/icon-1.png"></img>
+        龙宫炼狱版
+      </div>
+    </div>
+
+    <!--<div class="container_menu">
       <div v-for="item in GameDataSmall" 
       @click="size=item.value"
       :class="{'container_menu_item_active': item.value===size}" class="container_menu_item" :key="item.value">
@@ -18,7 +24,7 @@
           <img width="12" src="/public/logo.png" style="margin-right: 2px"></img>{{ item.money }}
         </div>
       </div>
-    </div>
+    </div>-->
     <div class="container_menu">
       <div v-for="item in GameData" 
       @click="size=item.value"
@@ -27,37 +33,29 @@
         <img v-else  width="25" src="@/assets/SixGame/icon-1.png"></img>
         <span>{{ item.name }}</span>
         <div class="money">
-          <img width="12" src="/public/logo.png" style="margin-right: 2px"></img>{{ item.money }}
-        </div>
-      </div>
-    </div>
-    <div class="container_menu">
-      <div v-for="item in GameDataBig" 
-      @click="size=item.value"
-      :class="{'container_menu_item_active': item.value===size}" class="container_menu_item" :key="item.value">
-        <img v-if="item.value===size" width="25" src="@/assets/SixGame/icon-2.png"></img>
-        <img v-else  width="25" src="@/assets/SixGame/icon-1.png"></img>
-        <span>{{ item.name }}</span>
-        <div class="money">
-          <img width="12" src= "/public/logo.png" style="margin-right: 2px"></img>{{ item.money }}
+          <!-- <img width="12" src="/public/logo.png" style="margin-right: 2px"></img>{{ item.money }} -->
         </div>
       </div>
     </div>
     <keep-alive>
-      <IndexItem ref="IndexItemChild" :key="size" :size="size" :isShengdan="isShengdan"/>
+      <IndexItem ref="IndexItemChild" :mapType="mapType" :key="size + mapType" :size="size" :isShengdan="isShengdan"/>
     </keep-alive>
   </div>
 </template>
 
 <script setup lang="ts">
-  import { GameData, GameDataSmall, GameDataBig } from './data';
+  import { GameData } from './data';
   import { onMounted, onActivated, onUnmounted, ref, computed } from 'vue';
   import IndexItem from './IndexItem.vue';
   const size = ref(6);
   const isShengdan = ref(true)
+  const mapType = ref('ly')
   const IndexItemChild = ref(null)
 
   onMounted(() => {});
+  const changeType = (type: string)=>{
+    mapType.value = type
+  }
 </script>
 
 <style lang="scss" scoped>
@@ -93,6 +91,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-top: 4px;
       & > img{
         margin-right: 2px;
       }

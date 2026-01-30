@@ -13,6 +13,7 @@
         v-for="(item, index) in dataList"
         class="card-item"
         :key="item.value"
+        :title="item.name"
         :style="{
           width: itemWidth + 'px',
           height: itemWidth + 'px',
@@ -21,7 +22,7 @@
           '--color': (index %2) === ((Math.floor(index / size))%2) ? '#857557' : '#857557'
         }"
       >
-        <img :src="ImageData[item.imgIndex || 0]"></img>
+        <img :src="getImageUrl(item.name)"></img>
       </div>
     </div>
 
@@ -46,7 +47,7 @@
 </template>
 
 <script setup lang="ts">
-  import { SixData, SixDataListType, GameData } from './data';
+  import { SixData, SixDataLY, SixDataListType, GameData } from './data';
   import { ImageData } from './ImageData.js';
   import { onMounted, onActivated, onUnmounted, ref, computed, watch } from 'vue';
   import html2canvas from 'html2canvas'
@@ -57,7 +58,8 @@
   const itemWidth = ref(10);
   const props = defineProps<{
     size: number;
-    isShengdan: boolean
+    isShengdan: boolean;
+    mapType: string
   }>();
   const dataList = ref<SixDataListType[]>([]);
   const loading = ref(false);
@@ -81,20 +83,14 @@
     loading.value=true
     const data: SixDataListType[] = [];
     const otherData: SixDataListType[] = [];
-    SixData.forEach((item, index) => {
-      if(props.size <6){
-        let addCount = 1 + item.add * 2 * props.size;
-        for (let i = 0; i < addCount; i++) {
-          otherData.push({ name: item.name, value: `${item.name}-${i + 1}`, imgIndex: index });
-        }
-      }else{
-        for (let i = 0; i < item.min; i++) {
+    const originData = props.mapType==='ly'? SixDataLY : SixData
+    originData.forEach((item, index) => {
+      for (let i = 0; i < item.min; i++) {
           data.push({ name: item.name, value: `${item.name}-${i + 1}`, imgIndex: index });
         }
         let addCount = (item.max - item.min) * (parseInt(String(item.add * (props.size-6)))+1);
         for (let i = item.min; i < addCount; i++) {
           otherData.push({ name: item.name, value: `${item.name}-${i + 1}`, imgIndex: index });
-        }
       }
     });
     let resultData = data.concat(getRandomElements(otherData, allCount.value - data.length));
@@ -129,6 +125,11 @@
     const result = copyArr.slice(0, takeCount);
     return result;
   };
+
+  const getImageUrl = (name: string) => {
+    console.log(name)
+    return new URL(`../../assets/SixGame/icon/${name}.png`, import.meta.url).href;
+  }
 
   const downloadImage = async() => {
       const targetContainer = document.getElementById(`card_container`);
