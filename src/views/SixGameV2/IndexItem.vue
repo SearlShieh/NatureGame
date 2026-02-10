@@ -23,12 +23,12 @@
           '--color': (index %2) === ((Math.floor(index / size))%2) ? '#857557' : '#857557'
         }"
       >
-        <img :src="getImageUrl(item.name)" :style="{'opacity': size===item.value? 1: 0.8}"></img>
+        <img :src="getImageUrl(item.name)" :style="{'opacity': size==item.value? 1: 0.8}"></img>
       </div>
     </div>
 
     <div  class="container_menu" style="position: relative;top: -2vw;left: -2vw">
-      <img src="../../assets/SixGame/btn/again.png" style="width: 25vw" :loading="loading" v-if="times > 0" @click="refresh">
+      <img src="../../assets/SixGame/btn/again.png" style="width: 25vw"  v-if="times > 0" @click="refresh">
       <img src="../../assets/SixGame/btn/save.png" style="width: 25vw"  @click="downloadImage">
     </div>
 
