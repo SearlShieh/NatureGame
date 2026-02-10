@@ -17,11 +17,11 @@
     <div class="container_menu" style="margin-top: 1vw">
       <div v-for="item in GameData" 
       @click="size=item.value" :key="item.value">
-        <img style="width: 8vw;" :style="{'opacity': size===item.value? 1: 0.8}" :src="getNumberImageUrl(item.value)"></img>
+        <img style="width: 8vw;" :style="{'opacity': size===item.value? 1: 0.8}" :src="getNumberImageUrl(String(item.value))"></img>
       </div>
     </div>
     <keep-alive>
-      <IndexItem ref="IndexItemChild" :mapType="mapType" :key="size + mapType" :size="size" :isShengdan="isShengdan"/>
+      <IndexItem ref="IndexItemChild" :mapType="mapType" :key="size + mapType" :size="size"/>
     </keep-alive>
   </div>
   </div>
@@ -32,7 +32,6 @@
   import { onMounted, onActivated, onUnmounted, ref, computed } from 'vue';
   import IndexItem from './IndexItem.vue';
   const size = ref(6);
-  const isShengdan = ref(true)
   const mapType = ref('ly')
   const IndexItemChild = ref(null)
 
@@ -41,7 +40,7 @@
     mapType.value = type
   }
 
-  const getNumberImageUrl = (name: string) => {
+  const getNumberImageUrl = (name: string|number) => {
     return new URL(`../../assets/SixGame/btn/${name}.png`, import.meta.url).href;
   }
 </script>

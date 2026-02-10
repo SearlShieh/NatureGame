@@ -118,7 +118,7 @@
     return result;
   };
 
-  const getImageUrl = (name: string) => {
+  const getImageUrl = (name: string|number) => {
     console.log(name)
     return new URL(`../../assets/SixGame/iconV2/${name}.png`, import.meta.url).href;
   }
