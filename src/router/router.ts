@@ -10,7 +10,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/sixgame',
-    component: () => import('@/views/SixGame/index.vue'),
+    component: () => import('@/views/SixGameV2/index.vue'),
   },
   {
     path: '/gucheng',
