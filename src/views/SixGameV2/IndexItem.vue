@@ -23,7 +23,7 @@
           '--color': (index %2) === ((Math.floor(index / size))%2) ? '#857557' : '#857557'
         }"
       >
-        <img :src="getImageUrl(item.name)" :style="{'opacity': String(size) === String(item.value)? 1: 0.8}"></img>
+        <img :src="getImageUrl(item.name)"></img>
       </div>
     </div>
 
