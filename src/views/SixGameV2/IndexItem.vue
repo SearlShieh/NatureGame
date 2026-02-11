@@ -120,7 +120,7 @@
 
   const getImageUrl = (name: string|number) => {
     console.log(name)
-    return new URL(`../../assets/SixGame/iconV2/${name}.png`, import.meta.url).href;
+    return new URL(`../../assets/SixGame/iconV3/${name}.png`, import.meta.url).href;
   }
 
   const downloadImage = async() => {
@@ -129,7 +129,7 @@
         const canvas = await html2canvas(targetContainer, {
             useCORS: true,
             scale: window.devicePixelRatio || 2, // 适配Retina屏
-            backgroundColor: '#0a192f',
+            // backgroundColor: '#ffd31329',
             logging: false
           });
 
@@ -174,11 +174,12 @@
   }
   .card-item {
     position: absolute;
-    border: 2px solid var(--color);
     transition: 0.5s;
     border-radius: 4px;
     overflow: hidden;
     box-sizing: border-box;
+    border: 1px solid #ef3919;
+    background: #ffd31329;
     & > img {
       height: 100%;
       width: 100%;
