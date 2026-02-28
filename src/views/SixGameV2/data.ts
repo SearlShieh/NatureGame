@@ -35,7 +35,6 @@ export const SixData: SixDataType[] = [
   { name: 'danglu', min: 3, max: 6, add: 1.2 },
   { name: 'jinlin', min: 4, max: 8, add: 1.5 },
   { name: 'hufu', min: 4, max: 8, add: 1.5 },
-  { name: 'ka', min: 2, max: 4, add: 0.8 },
 ];
 
 export const SixDataLY: SixDataType[] = [
@@ -44,12 +43,11 @@ export const SixDataLY: SixDataType[] = [
   { name: 'dajian', min: 1, max: 2, add: 0.8 },
   { name: 'longtou', min: 1, max: 3, add: 0.8 },
   { name: 'guixi', min: 3, max: 5, add: 1 },
-  { name: 'hua', min: 6, max: 8, add: 1.5 },
+  { name: 'hua', min: 6, max: 8, add: 1.8 },
   { name: 'mao', min: 1, max: 2, add: 1 },
   { name: 'huli', min: 2, max: 3, add: 1.2 },
   { name: 'jinzun', min: 2, max: 3, add: 1 },
-  { name: 'tongjing', min: 2, max: 5, add: 1.2 },
-  { name: 'dizi', min: 4, max: 6, add: 1.5 },
+  { name: 'tongjing', min: 3, max: 6, add: 1.5 },
+  { name: 'dizi', min: 4, max: 7, add: 1.8 },
   { name: 'gou', min: 4, max: 6, add: 1 },
-  { name: 'ka', min: 2, max: 3, add: 1.3 },
 ];
